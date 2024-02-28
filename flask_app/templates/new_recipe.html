@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between mb-4">
+            <div>
+                <h1>Add a new recipe!</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="">
+                <a href="/recipes">Back to recipes</a>
+                <a href="/logout">logout</a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column">
+                <form  action="/recipes/new/recipe" method="post">
+                    <div class="d-flex mb-4" >
+                        <label class="form-label me-2" for="name">Name: </label>
+                        <input class="form-control" type="text" name="name" id="recipe_name_id">
+                    </div>
+                    <div class="d-flex mb-4">
+                        <label class="form-label me-2" for="description">Description:</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="d-flex mb-4">
+                        <label class="form-label me-2" for="instructions">Instructions: </label>
+                        <textarea class="form-control" name="instructions" id="recipe_instructions_id" cols="30" rows="10"></textarea>
+                    </div>
+            </div>
+            <div class="d-flex flex-column justify-content-around">
+                    <div>
+                        <label for="date_cooked">Date Cooked/Made</label>
+                        <input type="date" name="date_cooked" id="date_cooked_id">
+                    </div>
+                    <div>
+                        <h3>Cooked in under 30 minutes?</h3>
+                        <input type="radio" name="under_30" id="under_30_id" value="Yes">
+                        <label for="under_30">Yes</label>
+                        <input type="radio" name="under_30" id="under_30_id" value="No" checked>
+                        <label for="under_30">No</label>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

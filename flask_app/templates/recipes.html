@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Recipes</title>
+</head>
+<body> 
+    <div class="container">
+        <div>
+            <h1>Welcome {{ user.first_name }}</h1>
+        </div>
+        <div class="d-flex justify-content-between">
+            <h3>All posted recipes:</h3>
+            <div>
+                <a href="/recipes/new">+ Create</a> 
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <th>Name</th>
+                    <th>Under</th>
+                    <th>Posted By</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    {% for one_recipe in all_recipes: %}
+                    <tr>
+                        <td>{{ one_recipe.name }}</td>
+                        <td>{{ one_recipe.under_30 }}</td>
+                        <td>{{ one_recipe.owner.first_name }}</td>
+                        <td>
+                            <a href="/recipes/{{one_recipe.id}}">view</a> |
+                            {% if one_recipe.owner.id == user.id %}
+                            <a href="/recipes/edit/{{one_recipe.id}}">edit</a> |
+                            <a href="/recipes/{{one_recipe.id}}/delete">delete</a>
+                            {% endif %} 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
